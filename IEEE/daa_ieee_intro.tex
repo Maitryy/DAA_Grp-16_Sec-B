@@ -53,6 +53,8 @@ This paper discusses about an algorithm that is  designed to  find the missing e
 \ \ \ \ This paper also contains the analysis about the time and space complexities of the algorithm. By the end of the paper, we will be able to understand all the components of algorithm design and will learn different ways of analysing the 
 algorithms. 
 
+
+
 \begin{center}II. ALGORITHM DESIGN\end{center}
 
 \ \ \ \ The given problem can be solved by divide and conquer algorithm.Here we will be using the binary search approach .We will divide a given problem into smaller sub-problems and appropriately combine their solutions to get the solution to the main problem.  
@@ -78,7 +80,6 @@ algorithms.
 
 \begin{center}III. PSEUDO CODE\end{center}
 
-\textit{ Declare global variable ans=INT\_MIN}
 
 Function binarysearch(Argument a$[$$]$,Argument b$[$$]$, Argument n) 
 
@@ -130,6 +131,64 @@ end
 
 \} 
 
+\begin{center}IV. ALGORITHM ANALYSIS\end{center}
+
+
+\ \ For the above approach based on divide and conquer we are effectively dividing the array in the array into 2 halves and taking one of the two halves which is further divided into two halves, until the missing element is found.
+ 
+
+\textit{ Calculating time complexity: }Assume that k (the function missing Term) is called k times. 
+
+-  Assume the length of the array before any function calls is n. At each function call, the array is divided into 2 equal halves.
+
+- After the 1st function call, length of array becomes n/2.
+
+- And according to the required condition one of the two halves is taken into consideration.
+
+-  After the 2nd function call, the halved array from the previous step is divided again into two parts and length of array becomes n/4.
+
+-  Similarly, After the 3rd function call, length of array becomes n/8.
+
+-  Considering the same scenario after the k$^{th}$ function call, length of array becomes n/2$^{k}$.
+
+-  Since the length of the array becomes 1 after k function calls(worst case) 
+
+=$>$ n = 2$^{k}$
+
+Hence k = log$_{2}$ (n)
+
+
+
+Hence, the time complexity for the above approach is log$_{2}$
+(n).
+
+\textbf{Best Case }
+
+When the element at the middle of the array is missing, i.e. the element at the middle position is not at the appropriate position in the AP, the best case arises. As we've found the required element in the 1$^{st}$ call so, there are no function calls involved and hence the time complexity would be O(1).
+
+
+\end{multicols}
+\begin{center}TABLE 1\end{center}
+
+\begin{center}TIME COMPLEXITY OF BINARY SEARCH APPROACH\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Class} & \textbf{Time} & \textbf{Space} \\
+\hline
+Worst case Complexity & O(log n) & O(n) \\
+\hline
+Best Case Complexity & O(1) & O(n) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{multicols}{2}
+The space complexity of the algorithm will be O(n) because we're allocating the memory to a new array of the same size of the given array. So, extra space needed is O(n).
+
+Space Complexity: O(n)
 
 
 \begin{center}VII. CONCLUSION\end{center}
