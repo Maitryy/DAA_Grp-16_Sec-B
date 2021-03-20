@@ -55,7 +55,7 @@ algorithms.
 
 
 
-\begin{center}II. ALGORITHM DESIGN\end{center}
+\begin{center}II. ALGORITHM DESIGN-1\end{center}
 
 \ \ \ \ The given problem can be solved by divide and conquer algorithm.Here we will be using the binary search approach .We will divide a given problem into smaller sub-problems and appropriately combine their solutions to get the solution to the main problem.  
 
@@ -75,10 +75,32 @@ algorithms.
 \setcounter{numberedCntA}{\theenumi}
 \end{enumerate}
 
+\begin{center}II. ALGORITHM DESIGN-2\end{center}
+
+\ \ \ \ The given problem can be solved using divide and conquer approach which is similar to binary search.Basically we divide the given problem into smaller sub-problems and appropriately combine their solutions to get the solution to the main problem.  
+
+
+\textit{  Approach:}The idea is to keep on checking the difference between the middle element and its adjacent elements unless the difference is not equal to the desired common difference.
+
+
+\textit{  Algorithm:}
+
+\newcounter{numberedCntB}
+\begin{enumerate}
+\item Find the mid element of the array and initialise an answer variable as the smallest integer that can be stored.
+\item Check the difference between the middle element and its previous element. If the difference is not equal to the common difference of the AP, then store the missing number in an answer variable and make no further calls to the function, else proceed to next step.
+\item Check the difference between the middle element and its next element. If the difference is not equal to the common difference of the AP, then store the missing number in a variable and make no further calls to the function, else proceed to next step.
+\item If the current element is at its correct position, then divide the array into 2 halves, and perform the above steps in the later half, i.e. in the sub array from mid+1 till the end.
+\item If the current element is not at its correct position, then divide the array into 2 halves, and perform the above steps in the first half, i.e. in the sub array from starting element till the mid.
+\item After performing all the steps for all the subproblems, if the value of the answer variable is unchanged, then no element is missing in the array, otherwise, print the value of the answer variable.
+\setcounter{numberedCntB}{\theenumi}
+\end{enumerate}
 
 
 
-\begin{center}III. PSEUDO CODE\end{center}
+
+
+\begin{center}III. PSEUDO CODE-1\end{center}
 
 
 Function binarysearch(Argument a$[$$]$,Argument b$[$$]$, Argument n) 
@@ -131,17 +153,106 @@ end
 
 \} 
 
+
+\begin{center}III. PSEUDO CODE-2\end{center}
+
+\textit{ Declare global variable ans=INT\_MIN}
+
+Function missingTerm(Argument a$[$$]$, Argument l, Argument h, Argument d) 
+
+
+\{ 
+
+\quad  If l is greater than or equal to h 
+
+\quad\quad return ; 
+
+
+
+\quad initialize m = (l + h) / 2
+
+\quad initialize current=a$[0]$+m*d
+
+
+
+\quad If a$[m]$-a$[m-1]$ is not equal to d and m is greater than 0
+
+\quad\quad ans=a$[m-1]$+d 
+
+
+\quad Else if a$[m+1]$-a$[m]$ is not equal to d and m+1 is less than h 
+
+ \quad\quad ans=a$[m]$+d 
+ 
+ \quad Else if a$[m]$ is equal to current
+ 
+ \quad\quad missingTerm(a, m+1, h, d)
+ 
+ \quad Else 
+ 
+ \quad\quad missingTerm(a. l, m-1, d)
+
+ 
+
+\quad return ; 
+
+end
+
+\} 
+
+\ \ Main function()\{ 
+
+\quad Initialize integer array arr$[$$]$
+
+\quad  Initialize n as size of array
+
+\quad Input the elements of the array 
+
+\quad If n is less than 3, print "invalid input"
+
+\quad Else \{
+
+\quad Initialize d
+
+\quad If a$[2]$-a$[1]$ is equal to a$[1]$-a$[0]$
+
+\quad \quad d=a$[1]$-a$[0]$
+
+\quad Else if a$[3]$-a$[2]$ is equal to a$[2]$-a$[1]$
+
+\quad \quad d=a$[2]$-a$[1]$
+
+\quad Else 
+
+\quad \quad d=a$[1]$-a$[0]$
+
+\quad missingTerm(a, 0, n, d)
+
+\quad If ans is greater than INT\_MIN
+
+\quad \quad print ans
+
+\quad If ans is greater than INT\_MIN
+
+\quad \quad print No term is missing
+
+\}
+
+
+
+\} 
+
 \begin{center}IV. ALGORITHM ANALYSIS\end{center}
 
 
-\ \ For the above approach based on divide and conquer we are effectively dividing the array in the array into 2 halves and taking one of the two halves which is further divided into two halves, until the missing element is found.
+\ \ For both of the above approaches that are based on divide and conquer we are effectively dividing the array in the array into 2 halves and taking one of the two halves which is further divided into two halves, until the missing element is found.
  
 
 \textit{ Calculating time complexity: }Assume that k (the function missing Term) is called k times. 
 
--  Assume the length of the array before any function calls is n. At each function call, the array is divided into 2 equal halves.
+-  Assume the length of the array before any function calls is n. At each function call, the array is divided into 2 equal halves in approach-2 and in each iteration in the first approach its divided into two equal halves. 
 
-- After the 1st function call, length of array becomes n/2.
+- After the 1st function call, length of array becomes n/2. Also, in each next iteration in first method
 
 - And according to the required condition one of the two halves is taken into consideration.
 
@@ -159,42 +270,80 @@ Hence k = log$_{2}$ (n)
 
 
 
-Hence, the time complexity for the above approach is log$_{2}$
+Hence, the time complexity for both the above approaches is log$_{2}$
 (n).
 
-\textbf{Best Case }
+\textbf{Best Case-2 }
+
+In this approach, the best case complexity is also O(log n) because the while loop will run always till the value of end becomes start.
+
+
+\textbf{Best Case-1 }
 
 When the element at the middle of the array is missing, i.e. the element at the middle position is not at the appropriate position in the AP, the best case arises. As we've found the required element in the 1$^{st}$ call so, there are no function calls involved and hence the time complexity would be O(1).
+
+\textbf{Space Complexity-1 }
+
+The space complexity of the algorithm will be O(n) because we're allocating the memory to a new array of the same size of the given array. So, extra space needed is O(n).
+
+Space Complexity: O(n)
+
+\textbf{Space Complexity-2 }
+
+The space complexity of the algorithm will be O(log n) because the number of recursive calls to the function increase after the value of the length of array is halved.
+
+Space Complexity: O(logn)
+
+
+
 
 
 \end{multicols}
 \begin{center}TABLE 1\end{center}
 
-\begin{center}TIME COMPLEXITY OF BINARY SEARCH APPROACH\end{center}
+\begin{center}TIME COMPLEXITY OF  BINARY SEARCH APPROACHES \end{center}
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
-\textbf{Class} & \textbf{Time} & \textbf{Space} \\
+\textbf{Class} & \textbf{Approch-1} & \textbf{Approch-2} \\
 \hline
-Worst case Complexity & O(log n) & O(n) \\
+Worst case Complexity & O(log n) & O(log n) \\
 \hline
-Best Case Complexity & O(1) & O(n) \\
+Average case Complexity & O(log n) & O(log n) \\
+\hline
+Best Case Complexity & O(1) & O(log n) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{center}TABLE 2\end{center}
+
+\begin{center}SPACE COMPLEXITY OF  BINARY SEARCH APPROACHES\end{center}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Class} & \textbf{Approch-1} & \textbf{Approch-2} \\
+\hline
+Space Complexity & O(n) & O(log n) \\
 \hline
 \end{tabular}
 \end{table}
 
 \begin{multicols}{2}
-The space complexity of the algorithm will be O(n) because we're allocating the memory to a new array of the same size of the given array. So, extra space needed is O(n).
 
-Space Complexity: O(n)
+
+
 
 
 \begin{center}VII. CONCLUSION\end{center}
 
-\ \ \ \ We can conclude that the above algorithm has the least time and space 
-complexity to find the missing element in an array that represents elements of an arithmetic progression in order.
+\ \ \ \ We can conclude that the second algorithm has the least time and space 
+complexity to find the missing element in an array that represents elements of an arithmetic progression in order. 
+The other one has same worst and average time complexity but best case time complexity of first approch is less than second one. Also,  it's space complexity is more than the other one.
 
 
 \begin{center}REFERENCES\end{center}
