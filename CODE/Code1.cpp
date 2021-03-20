@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 int binsearch(int a[],int b[],int n)
 {
     int start=0,end=n-1;
@@ -10,7 +9,7 @@ int binsearch(int a[],int b[],int n)
         mid= start+((end-start)/2);
         if(a[mid]==b[mid])
         {
-            start=mid+1;;
+            start=mid+1;
         }
         else if(a[mid]!=b[mid])
         {
@@ -30,6 +29,12 @@ int main()
 	{
 		cin>>a[i];
 	}
+	if(n<=2)
+	{
+		cout<<"No element is missing"<<endl;
+	}
+	else
+	{
 	b[0]=a[0];
 	int d=(a[n-1]-a[0])/n;
 	for(int i=1;i<n;i++)
@@ -38,5 +43,6 @@ int main()
 	}
 	int ans=binsearch(a,b,n);
 	cout<<"The missing number is: "<<ans<<endl;
+	}
 	return 0;
 }
